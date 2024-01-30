@@ -10,13 +10,13 @@ object fibonacci extends App{
   println(fibonacci(12))
 
 
-//  @tailrec
-//  def fibonacciTailrec(n: Int , last :Int , nextLast:Int): Int = {
-//    if (n <= 2) last
-//    else fibonacciTailrec(n-1 ,last+ nextLast,last)
-//  }
-//
-//  println(fibonacciTailrec(12,1,1))
+  @tailrec
+  def fibonacciTailrec(n: Int , last :Int , nextLast:Int): Int = {
+    if (n <= 2) last
+    else fibonacciTailrec(n-1 ,last+ nextLast,last)
+  }
+
+  println(fibonacciTailrec(12,1,1))
 }
 
 // 8
