@@ -1,5 +1,7 @@
 package Basics
 
+import scala.annotation.tailrec
+
 object Functions extends App{
 
   def  aFunction (a:String , b:Int) =
@@ -38,5 +40,10 @@ object Functions extends App{
       println(s"Hi my name is $name and I am $n years old");
     }
     greeting("rohan",1)
+
+  @tailrec
+  def concteTrailRec(aString:String , n:Int , accumlator:String):String=
+    if(n<=0) accumlator
+    else concteTrailRec(aString, n-1 , aString+ accumlator)
 
 }

@@ -1,5 +1,7 @@
 package Basics
 
+import scala.annotation.tailrec
+
 // Auxillary function
 object prime extends App{
  def isPrime(n:Int):Boolean= {
@@ -11,4 +13,18 @@ object prime extends App{
    isPrimeUntil(n / 2)
  }
   println(isPrime(8))
+
+
+  def isPrimeTrail(n:Int):Boolean={
+    @tailrec
+    def isPrimeUntiltrail(t:Int , isStillPrime:Boolean):Boolean={
+      if (!isStillPrime) false
+      if(t<=1) true
+      else isPrimeUntiltrail(t-1, n%t!=0 && isStillPrime)
+
+    }
+    isPrimeUntiltrail(n/2 , true)
+  }
+  println(isPrimeTrail(2004))
+
 }
