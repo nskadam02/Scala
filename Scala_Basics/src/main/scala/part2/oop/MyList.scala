@@ -1,6 +1,6 @@
 package part2.oop
 
-abstract class MyList {
+abstract class MyList[+A] {
 /*
  head - > first element
  tail - remainder of list
@@ -9,10 +9,10 @@ abstract class MyList {
  toString =>string representation
  */
 
-  def head :Int
-  def tail:MyList
+  def head :A
+  def tail:MyList[A]
   def isEmpty:Boolean
-  def add(ele:Int):MyList
+  def add[B>:A](ele:B):MyList[B]
   def printElement:String
 
   //polymorphism
@@ -20,26 +20,26 @@ abstract class MyList {
 
 
 }
-object Empty extends MyList{
-  def head: Int = throw new NoSuchElementException // return nothing
+object Empty extends MyList[Nothing]{
+  def head: Nothing = throw new NoSuchElementException // return nothing
 
-  def tail: MyList = throw new NoSuchElementException
+  def tail: MyList[Nothing] = throw new NoSuchElementException
 
   def isEmpty: Boolean = true
 
-  def add(ele: Int): MyList= new Cons(ele,Empty)
+  def add[B>:Nothing](ele: B): MyList[B]= new Cons(ele,Empty)
 
   override def printElement: String = ""
 }
 
-class Cons(h:Int,t:MyList) extends MyList{
-  def head: Int = h
+class Cons[+A](h:A,t:MyList[A]) extends MyList[A]{
+  def head: A = h
 
-  def tail: MyList = t
+  def tail: MyList[A] = t
 
   def isEmpty: Boolean= false
 
-  def add(ele: Int): MyList= new Cons(ele , this)
+  def add[B>:A](ele: B): MyList[B]= new Cons(ele , this)
 
   override def printElement: String = {
     if(t.isEmpty) ""+h
@@ -48,10 +48,14 @@ class Cons(h:Int,t:MyList) extends MyList{
 }
 
 object ListTest extends App{
-  val list = new Cons(1,new Cons(2,new Cons(3,Empty)))
-  println(list.tail.head)
-  println(list.add(4).head)
-  println(list.isEmpty)
-
-  println(list.toString)
+  val lisINt:MyList[Int]=new Cons[Int](1,new Cons[Int](2,new Cons[Int](3,Empty)))
+  val listStirn : MyList[String]=new Cons[String]("hi",new Cons[String]("hello",new Cons[String]("scala",Empty)))
+//  val list = new Cons(1,new Cons(2,new Cons(3,Empty)))
+//  println(list.tail.head)
+//  println(list.add(4).head)
+//  println(list.isEmpty)
+//
+//  println(list.toString)
+println(listStirn.toString)
+  println(lisINt.toString)
 }
